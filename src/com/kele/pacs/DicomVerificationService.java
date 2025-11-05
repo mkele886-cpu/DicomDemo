@@ -1,4 +1,4 @@
-package com.yinglian.pacs;
+package com.kele.pacs;
 
 import org.dcm4che3.data.Attributes;
 import org.dcm4che3.net.Association;
