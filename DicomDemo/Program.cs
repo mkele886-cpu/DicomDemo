@@ -20,13 +20,6 @@ class Program
         Console.WriteLine("===========================================");
         Console.WriteLine();
 
-        // Setup logging
-        var loggerFactory = LoggerFactory.Create(builder =>
-        {
-            builder.AddConsole();
-            builder.SetMinimumLevel(LogLevel.Information);
-        });
-
         try
         {
             // Create DICOM servers for each service

@@ -63,13 +63,14 @@ public class DicomStorageService : DicomService, IDicomServiceProvider, IDicomCS
 
     public async Task<DicomCStoreResponse> OnCStoreRequestAsync(DicomCStoreRequest request)
     {
-        var studyUid = request.Dataset.GetSingleValue<string>(DicomTag.StudyInstanceUID);
         var sopInstanceUid = request.SOPInstanceUID.UID;
-
         _logger.LogInformation($"C-STORE: Receiving image - SOP Instance UID: {sopInstanceUid}");
 
         try
         {
+            // Get Study UID or use a default directory for images without Study UID
+            var studyUid = request.Dataset.GetSingleValueOrDefault(DicomTag.StudyInstanceUID, "UNKNOWN");
+            
             // Create directory structure by Study UID
             var studyPath = Path.Combine(StoragePath, studyUid);
             Directory.CreateDirectory(studyPath);
